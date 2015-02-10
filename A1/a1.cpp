@@ -3,6 +3,7 @@
 #include <typeinfo>
 #include <sstream>
 #include <vector>
+#include <math.h>
 
 int main (int argc, char* argv[]){
 	if (!(argc == 2)) {
@@ -43,8 +44,9 @@ int main (int argc, char* argv[]){
 						std::cout << "error 2" << '\n';
 						return 0;
 					}
-					std::vector<int> kmer_vector_temp (4^k, 0);
-					kmer_vector = kmer_vector_temp;
+					//std::vector<int> kmer_vector_temp (4^k, 0);
+					//kmer_vector = kmer_vector_temp;
+					kmer_vector.reserve(pow (4,k));
 			}
 			else {
 				if (line_length >= k) {
@@ -73,11 +75,11 @@ int main (int argc, char* argv[]){
 							std::cout<< "kmer[j]: " << kmer[j] << std::endl;
 							int tempint = kmer[j] - '0';
 							std::cout<< "tempint: " << tempint << std::endl;
-							position = position + (4^(k-j-1)*(tempint));
+							position = position + ((pow (4, k-j-1))*(tempint));
 							std::cout<< "position: " << position << std::endl;
 						}
 						kmer_vector[position] = kmer_vector[position] + 1;
-						std::cout << kmer_vector[position] << std::endl;
+						std::cout << "kmer_vector[position]" << kmer_vector[position] << std::endl;
 					}
 				}
 			}						
@@ -87,7 +89,12 @@ int main (int argc, char* argv[]){
 			std::cout << "error 3" << '\n';
 			return 0;
 		}
-		//iterate through array and print kmers
+		for (i = 0; i < pow (4, k); i++) {
+			if (!kmer_vector[i] == 0) {
+				
+				std::cout << converted_kmer << " " << kmer_vector[i] << std::endl;
+			}
+		}
 	}
 	fs.close();
 	return 0;
