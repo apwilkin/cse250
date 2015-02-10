@@ -1,0 +1,6 @@
+if (line_length == 3) {
+					k = line.at(0) - '0';
+					m = line.at(2) - '0';
+					std::cout <<"k: " << k << '\n';
+					std::cout <<"m: " << m << '\n';
+				}
