@@ -6,13 +6,15 @@
 class A2 {
 	public:
 	//default constructor
-	
+	explicit A2(int 
 	//copy constructor
 	A2(const A2& a2) {
+		
 	}
 	
 	//(assignment) operator
 	A2& operator=(const A2& a2) {
+		
 	}
 	//indexing operator
 	
@@ -21,6 +23,7 @@ class A2 {
 	private:
 		int rows_;
 		int columns_;
+		int size_;
 		T* ptr;
 
 }
