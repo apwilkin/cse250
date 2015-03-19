@@ -1,0 +1,11 @@
+#ifndef A4_HPP
+#define A4_HPP
+
+#include "Maze.hpp"
+
+// implement your function distance
+int distance(Maze& maze, int sx, int sy, int fx, int fy) {
+
+} // distance
+
+#endif // A4_HPP
