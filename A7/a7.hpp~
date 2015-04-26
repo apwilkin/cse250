@@ -1,0 +1,13 @@
+#ifndef A7_HPP
+#define A7_HPP
+
+#include "symbol.hpp"
+
+// IMPLEMENT YOUR FUNCTION huffman_tree
+template <typename Iter>
+bnode<symbol>* huffman_tree(Iter first, Iter last);
+
+// IMPLEMENT YOUR FUNCTION release_tree
+void release_tree(bnode<symbol>* root);
+
+#endif // A7_HPP
