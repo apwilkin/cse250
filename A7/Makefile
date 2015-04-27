@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-Wall -O3
 
-all: a6
+all: a7
 
 clean:
-	rm -rf a6
+	rm -rf a7
