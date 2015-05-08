@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-
+#include <algorithm>
 
 //add each int without sorting
 //do merge sort
@@ -10,15 +10,12 @@
 
 
 int main (int argc, char* argv[]) {
-	std::cout << "filename: " << argv[1] << std::endl;
 	std::fstream fs;
 	fs.open (argv[1]);
 	std::vector<int> numbers;
-//	numbers.reserve(2147483647);
-	std::cout << "checkpoint 1: " <<std::endl;
 	int max = 0;
 	int min = 0;
-	int median = -1;
+	int median;
 	std::string line;
 	if (fs.is_open()) {
 		while (getline(fs,line)) {
@@ -32,20 +29,11 @@ int main (int argc, char* argv[]) {
 			else {
 				if (line_int < min) {min = line_int;}
 			}
-			std::cout << "checkpoint 2: " <<std::endl;
-			numbers[line_int] += 1;			
+			numbers.push_back(line_int);			
 		}
 	}
-	for (int i = 0; i < 2147483647; i++) {
-		if (numbers[i] > 0) {
-			if (median == -1) {
-				median = i;
-			}
-			else if (median < numbers[i]) {
-				median = i;
-			}
-		}
-	}
+	std::sort (numbers.begin(), numbers.end());
+	median = numbers[(((numbers.size()) - 1)/2)];
 	fs.close();
-	std::cout << min << median << max <<std::endl;
+	std::cout << min << " " << median << " " << max <<std::endl;
 }

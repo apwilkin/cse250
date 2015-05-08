@@ -1,29 +1,81 @@
-#ifndef A2
-#define A2
+#ifndef A2_HPP
+#define A2_HPP
 
 #include <algorithm>
 
-class A2 {
+double class A2 {
 	public:
 	//default constructor
+	explicit A2(int n = 0, int m = 0) : rows_(std::max(0, n)), columns_(std::max(0,m)) {
+		size_ = rows_*columns_;
+		if (rows_ == 0 || columns_ == 0) ptr_ = 0;
+		else ptr_ = new double[size_];
+	}
 	
 	//copy constructor
-	A2(const A2& a2) {
+	A2(const A2& a2) : rows_(a2.rows_), columns_(a2.columns_), size_(a2.size_) {
+		if (rows_ == 0 || columns_ == 0) ptr_ = 0;
+		else {
+			ptr_ = new double[size_];
+			std::copy(a2.ptr_, a2.ptr_ + size_, ptr_);
+		}
 	}
 	
 	//(assignment) operator
 	A2& operator=(const A2& a2) {
+		if (this == &a2) return *this;
+		delete[] ptr_;
+		rows_ = a2.rows_;
+		columns_ = a2.columns_;
+		size_ = a2.size_;
+		if (rows_ == 0 && columns_ == 0) ptr_ = 0;
+		else {
+			ptr_ = new double[size_];
+			std::copy(a2.ptr_, a2.ptr_ + size_, ptr_);
+		}
+		return *this;
 	}
-	//indexing operator
 	
-	~A2 { delete[] ptr_; } //destructor
+	//destructor	
+	~A2() { delete[] ptr_; } //destructor
+	
+	//rsum function
+	int rsum(int n) {
+		int sum = 0;
+		for (int j = 0; j < columns_; j++) {
+			int location = columns_*n + j;
+			sum += ptr_[location];
+		}
+		return sum;
+	}
+	
+	//csum function
+	int csum(int m) {
+		int sum = 0;
+		for (int i = 0; i < rows_; i++) {
+			int location = i*columns_ + m;
+			sum += ptr_[location];
+		}
+		return sum;
+	}
+	
+	// A(i,j) = 0;
+	double& operator()(int n, int m) {
+		int location = n*columns_ + m;
+		return ptr_[location];
+	}
+	//x = A(i,j);
+	const double& operator()(int n, int m) const {
+		int location = n*columns_ + m;
+		return ptr_[location];
+	}
 	
 	private:
 		int rows_;
 		int columns_;
 		int size_;
-		T* ptr;
+		double* ptr_;
 
-}
+}; //end class definition of A2
 
 #endif
