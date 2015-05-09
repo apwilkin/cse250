@@ -1,5 +1,5 @@
-tar cf A7.tar A7/
-scp A7.tar apwilkin@nickelback.cse.buffalo.edu:/home/eedue/apwilkin/cse250/
-scp -r A7/ apwilkin@nickelback.cse.buffalo.edu:/home/eedue/apwilkin/cse250/
+tar cf A8.tar A8/
+scp A8.tar apwilkin@nickelback.cse.buffalo.edu:/home/eedue/apwilkin/cse250/
+scp -r A8/ apwilkin@nickelback.cse.buffalo.edu:/home/eedue/apwilkin/cse250/
 ssh apwilkin@nickelback.cse.buffalo.edu
-submit_cse250 A7.tar
+submit_cse250 A8.tar

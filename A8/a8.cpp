@@ -6,7 +6,7 @@
 
 
 int main (int argc, char* argv[]) {
-	std::string alphabet = "abcdefghijklmnopqrstuvwxyz";
+	std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	std::fstream d_file;
 	d_file.open(argv[1]);
 	std::string dictionary_line;
@@ -40,15 +40,51 @@ int main (int argc, char* argv[]) {
 		//else begin correction process
 	    else {  
 		    int name_size = test_name.size();
-		    int possible_corrections = (name_size + 26*(name_size + 1) + 25*name_size);
- 		    std::vector<std::string> correction_list(possible_corrections);
+		    int possible_corrections = (name_size + 26*(name_size + 1) + 26*name_size);
+ 		    //std::vector<std::string> correction_list(possible_corrections);
+ 		    std::string correction_list[possible_corrections];
+ 		    int next_correction = 0;
  		    /*add in all possible corrections to vector
  		    	-deletion
  		    	-insertion
  		    	-substitution
  		    */
- 		    
-    		
+ 		    for (int i = 0; i < name_size; i++) {
+ 		    	//deletion
+ 		    	std::string delete_name = test_name;
+ 		    	delete_name.erase(i,1);
+ 		    	correction_list[next_correction] = delete_name;
+ 		    	next_correction = next_correction + 1;
+ 		    	for (int j = 0; j < 26; j++) {
+ 		    		//insert
+ 		    		std::string insert_name = test_name;
+ 		    		std::stringstream s;
+ 		    		std::string addition_replacement;
+ 		    		char ac = alphabet[j];
+ 		    		s << ac;
+ 		    		s >> addition_replacement;
+ 		    		insert_name.insert(i, addition_replacement);
+ 		    		correction_list[next_correction] = insert_name;
+ 		    		next_correction = next_correction + 1; 		    	
+ 		    		//replacement
+ 		    		std::string replace_name = test_name;
+ 		    		replace_name.replace(i,1,alphabet,j,1);
+ 		    		correction_list[next_correction] = replace_name;
+ 		    		next_correction = next_correction + 1;
+ 		    	}
+ 		    }
+ 		   	for (int j = 0; j < 26; j++) {
+ 		    	std::string end_name = test_name;
+ 		    	std::string insert_name = test_name;
+ 		    	std::stringstream s;
+ 		    	std::string addition_replacement;
+ 		    	char ac = alphabet[j];
+ 		    	s << ac;
+ 		    	s >> addition_replacement;
+ 		    	end_name.append(addition_replacement);
+ 		    	correction_list[next_correction] = end_name;
+ 		    	next_correction = next_correction + 1;
+ 		    }
     		
     		//correction check setup
  		    bool first_correction = true;
@@ -56,7 +92,7 @@ int main (int argc, char* argv[]) {
  		    int correction_value;
  	    	
  	    	//correction check
-		    for (int i = 0; i < possible_corrections; i++) {
+		    for (int i = 0; i < next_correction; i++) {
  		   		std::map<std::string, int>::iterator search2 = dictionary.find(correction_list[i]);
  		   		if (search2 != dictionary.end()) {
  		   			//if first match, set correction
@@ -67,13 +103,15 @@ int main (int argc, char* argv[]) {
  		   			}
  		   			else {
     					//compare frequency
-    					if (search2->second <= correction_value) continue;
-    					//compare length
-    					else if ((correction_list[i]).size()<= correction.size()) continue;
-    					//set
-    					else {
+    					if (search2->second > correction_value) {
     						correction = correction_list[i];
     						correction_value = search2->second;
+    					}
+    					//compare length
+    					else if(search2->second == correction_value) {
+    						if ((correction_list[i]).size() < correction.size()) {
+    							correction = correction_list[i];
+    						}
     					}
  		   			}
  		   		}

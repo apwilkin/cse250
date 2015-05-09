@@ -4,8 +4,17 @@
 #include <sstream>
 
 int main () {
+	int a = -1; int b = 0;
+	int* pa = &a; int*& rpa = pa;
+	pa = &b; *rpa = 1;
+	std::cout <<"a: " << a << std::endl;
+	std::cout <<"b: " << b << std::endl;
+	
 
-	int one = 4^2;
+
+
+
+/*	int one = 4^2;
 	int two = pow (4, 2);
 	std::cout << one << std::endl;
 	std::cout << two << std::endl;
@@ -30,28 +39,30 @@ int main () {
 	int what = 3;
 	int powint = pow
 	std::cout << pow(what, 3);
+*/
 	
-	
-//3 5
-//ACTGTCATGTTG
-//CACCAGACT
-//GCTAGCTACCAGTG
-//TCGTATGCTGACACCTG
-//AGCTATT
+/*	
+3 5
+ACTGTCATGTTG
+CACCAGACT
+GCTAGCTACCAGTG
+TCGTATGCTGACACCTG
+AGCTATT
 
 	
 
-//	std::vector<int> first;
-//	std::vector<int> second (4, 100);
-//	int ia = a - '0';
-//	std::cout << second[1] << std::endl;
-//	first = second;
-//	first[1] = 3;
-//	std::cout << first[1] << std::endl;
-//	std::cout << "The contents of second are:";
-//  	for (std::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
-//		std::cout << ' ' << *it;
-//	std::cout << '\n';
-//	int tempint = kmer[j] - '0';
+std::vector<int> first;
+std::vector<int> second (4, 100);
+int ia = a - '0';
+std::cout << second[1] << std::endl;
+first = second;
+first[1] = 3;
+std::cout << first[1] << std::endl;
+std::cout << "The contents of second are:";
+for (std::vector<int>::iterator it = second.begin(); it != second.end(); ++it)
+std::cout << ' ' << *it;
+std::cout << '\n';
+int tempint = kmer[j] - '0';
+*/
 	return 0;
 }
